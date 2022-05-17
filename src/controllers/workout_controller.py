@@ -1,18 +1,19 @@
 from fastapi import APIRouter
-from src.database.workout import WorkoutDB
+from typing import List
 
+from src.models.workout_models import Workout
+from src.services.workout_service import WorkoutService
 
 router = APIRouter(
     prefix="/api/v1/workouts",
     tags=['Workouts']
 )
 
-workout_db = WorkoutDB()
+workout_service = WorkoutService()
 
-@router.get("/")
+@router.get("/", response_model=List[Workout])
 def get_all_workouts():
-    workouts = workout_db.get_all_workouts()
-    return workouts
+    return workout_service.get_all_workouts()
 
 @router.get("/{id}")
 def get_workout(id: str):

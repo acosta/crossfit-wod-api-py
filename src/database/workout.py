@@ -13,4 +13,4 @@ class WorkoutDB:
         f.close()
 
     def get_all_workouts(self) -> list:
-        return self.data["workouts"]
+        return self.data["workouts"] if self.data is not None else []
