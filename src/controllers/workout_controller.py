@@ -1,5 +1,5 @@
-from fastapi import APIRouter
-from typing import List, Optional
+from fastapi import APIRouter, Response
+from typing import List
 
 from src.models.workout_models import Workout
 from src.services.workout_service import WorkoutService
@@ -28,5 +28,9 @@ def update_workout(id: str):
     return {"message": f"Update workout {id}"}
 
 @router.delete("/{id}")
-def delete_workout(id: str):
-    return {"message": f"Delete workout {id}"}
+def delete_workout(id: str, response: Response):
+    if not workout_service.delete_workout(id):
+        response.status_code = 400
+        return {"status": "FAILED"}
+
+    return {"status": "OK"}
