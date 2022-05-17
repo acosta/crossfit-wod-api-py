@@ -23,9 +23,9 @@ def get_workout(id: str):
 def create_workout(workout: WorkoutIn):
     return workout_service.create_workout(workout)
 
-@router.patch("/{id}")
-def update_workout(id: str):
-    return {"message": f"Update workout {id}"}
+@router.patch("/{id}", response_model=Workout)
+def update_workout(id: str, workout: WorkoutIn):
+    return workout_service.update_workout(id, workout)
 
 @router.delete("/{id}")
 def delete_workout(id: str, response: Response):

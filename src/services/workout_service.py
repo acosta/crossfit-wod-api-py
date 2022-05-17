@@ -1,4 +1,5 @@
 from datetime import datetime
+from hashlib import new
 from typing import List, Optional
 import uuid
 
@@ -37,5 +38,20 @@ class WorkoutService:
         new_workout = Workout(id=str(id), name=workout.name, mode=workout.mode, equipment=workout.equipment, exercises=workout.exercises, createdAt=created_at, updatedAt=created_at, trainerTips=workout.trainerTips)
         if self.workout_db.create_workout(new_workout):
             return new_workout
+
+        return None
+
+    def update_workout(self, id: str, new_workout: WorkoutIn) -> Optional[Workout]:
+        workout = self.get_workout(id)
+        if workout:
+            updated_at = datetime.now().strftime("%d/%m/%y, %H:%M:%S %p")
+            workout.updatedAt = updated_at
+            workout.name = new_workout.name
+            workout.mode = new_workout.mode
+            workout.equipment = new_workout.equipment
+            workout.exercises = new_workout.exercises
+            workout.trainerTips = new_workout.trainerTips
+            if self.workout_db.update_workout(id, workout):
+                return workout
 
         return None

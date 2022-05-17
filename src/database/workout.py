@@ -32,3 +32,12 @@ class WorkoutDB:
                     return True
 
         return False
+
+    def update_workout(self, id: str, new_workout: Workout) -> bool:
+        if self.data:
+            for index, workout in enumerate(self.data.get("workouts", [])):
+                if workout.get('id') == id:
+                    self.data.get("workouts")[index] = new_workout.dict()
+                    return True
+
+        return False
