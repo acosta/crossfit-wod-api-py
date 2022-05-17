@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from src.database.workout import WorkoutDB
 
 
 router = APIRouter(
@@ -6,9 +7,12 @@ router = APIRouter(
     tags=['Workouts']
 )
 
+workout_db = WorkoutDB()
+
 @router.get("/")
 def get_all_workouts():
-    return {"message": "Get all workouts"}
+    workouts = workout_db.get_all_workouts()
+    return workouts
 
 @router.get("/{id}")
 def get_workout(id: str):
