@@ -1,8 +1,6 @@
 import json
 import os
 
-from src.models.workout_models import Workout
-
 class WorkoutDB:
     def __init__(self) -> None:
         self.data = None
@@ -17,9 +15,9 @@ class WorkoutDB:
     def get_all_workouts(self) -> list:
         return self.data["workouts"] if self.data is not None else []
 
-    def create_workout(self, new_workout: Workout) -> bool:
+    def create_workout(self, new_workout: dict) -> bool:
         if self.data is not None:
-            self.data["workouts"].append(new_workout.dict())
+            self.data["workouts"].append(new_workout)
             return True
 
         return False
@@ -33,11 +31,11 @@ class WorkoutDB:
 
         return False
 
-    def update_workout(self, id: str, new_workout: Workout) -> bool:
+    def update_workout(self, id: str, new_workout: dict) -> bool:
         if self.data:
             for index, workout in enumerate(self.data.get("workouts", [])):
                 if workout.get('id') == id:
-                    self.data.get("workouts")[index] = new_workout.dict()
+                    self.data.get("workouts")[index] = new_workout
                     return True
 
         return False

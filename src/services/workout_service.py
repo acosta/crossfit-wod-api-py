@@ -36,7 +36,7 @@ class WorkoutService:
         created_at = datetime.now().strftime("%d/%m/%y, %H:%M:%S %p")
 
         new_workout = Workout(id=str(id), name=workout.name, mode=workout.mode, equipment=workout.equipment, exercises=workout.exercises, createdAt=created_at, updatedAt=created_at, trainerTips=workout.trainerTips)
-        if self.workout_db.create_workout(new_workout):
+        if self.workout_db.create_workout(new_workout.dict()):
             return new_workout
 
         return None
@@ -51,7 +51,7 @@ class WorkoutService:
             workout.equipment = new_workout.equipment
             workout.exercises = new_workout.exercises
             workout.trainerTips = new_workout.trainerTips
-            if self.workout_db.update_workout(id, workout):
+            if self.workout_db.update_workout(id, workout.dict()):
                 return workout
 
         return None
