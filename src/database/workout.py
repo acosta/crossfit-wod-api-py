@@ -23,3 +23,12 @@ class WorkoutDB:
             return True
 
         return False
+
+    def delete_workout(self, id: str) -> bool:
+        if self.data:
+            for index, workout in enumerate(self.data.get("workouts", [])):
+                if workout.get('id') == id:
+                    del self.data.get("workouts")[index]
+                    return True
+
+        return False

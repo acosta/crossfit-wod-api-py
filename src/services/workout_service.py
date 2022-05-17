@@ -28,14 +28,7 @@ class WorkoutService:
         return None
 
     def delete_workout(self, id: str) -> bool:
-        workouts = self.workout_db.get_all_workouts()
-
-        for index, workout in enumerate(workouts):
-            if workout.get('id') == id:
-                del workouts[index]
-                return True
-
-        return False
+        return self.workout_db.delete_workout(id)
 
     def create_workout(self, workout: WorkoutIn) -> Optional[Workout]:
         id = uuid.uuid4()
