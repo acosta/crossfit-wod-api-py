@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from src.database.workout import WorkoutDB
 from src.models.workout_models import Workout
@@ -15,3 +15,12 @@ class WorkoutService:
             all_workouts.append(Workout(**workout))
 
         return all_workouts
+
+    def get_workout(self, id: str) -> Optional[Workout]:
+        workouts = self.workout_db.get_all_workouts()
+
+        for workout in workouts:
+            if workout.get('id') == id:
+                return Workout(**workout)
+
+        return None

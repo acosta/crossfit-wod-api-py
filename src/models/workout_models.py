@@ -10,4 +10,4 @@ class Workout(BaseModel):
     exercises: List[str] = []
     createdAt: str
     updatedAt: str
-    trainer_tips: List[str] = []
+    trainerTips: List[str] = []
