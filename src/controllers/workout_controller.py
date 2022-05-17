@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Response
 from typing import List
 
-from src.models.workout_models import Workout
+from src.models.workout_models import Workout, WorkoutIn
 from src.services.workout_service import WorkoutService
 
 router = APIRouter(
@@ -19,9 +19,9 @@ def get_all_workouts():
 def get_workout(id: str):
     return workout_service.get_workout(id)
 
-@router.post("/")
-def create_workout():
-    return {"message": "Create a new workout"}
+@router.post("/", response_model=Workout, status_code=201)
+def create_workout(workout: WorkoutIn):
+    return workout_service.create_workout(workout)
 
 @router.patch("/{id}")
 def update_workout(id: str):

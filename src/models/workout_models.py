@@ -1,4 +1,3 @@
-from datetime import datetime
 from pydantic import BaseModel
 from typing import List
 
@@ -10,4 +9,11 @@ class Workout(BaseModel):
     exercises: List[str] = []
     createdAt: str
     updatedAt: str
+    trainerTips: List[str] = []
+
+class WorkoutIn(BaseModel):
+    name: str
+    mode: str
+    equipment: List[str] = []
+    exercises: List[str] = []
     trainerTips: List[str] = []

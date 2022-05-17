@@ -1,6 +1,8 @@
 import json
 import os
 
+from src.models.workout_models import Workout
+
 class WorkoutDB:
     def __init__(self) -> None:
         self.data = None
@@ -14,3 +16,10 @@ class WorkoutDB:
 
     def get_all_workouts(self) -> list:
         return self.data["workouts"] if self.data is not None else []
+
+    def create_workout(self, new_workout: Workout) -> bool:
+        if self.data is not None:
+            self.data["workouts"].append(new_workout.dict())
+            return True
+
+        return False
