@@ -18,7 +18,7 @@ The server should start with:
 uvicorn main:app --reload
 ```
 
-You will be able to make requests to: `http://127.0.0.1:3000`. If you want to change the port, run the server with the option `--port`:
+You will be able to make requests to: `http://127.0.0.1:8000`. If you want to change the port, run the server with the option `--port`:
 
 ```bash
 uvicorn main:app --reload --port 3000
